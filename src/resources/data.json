@@ -1,0 +1,11 @@
+{
+  "environments": {
+    "UI": ""},
+
+  "creds": {
+    "user1": {
+      "email": "",
+      "password": ""
+      }
+    }
+}

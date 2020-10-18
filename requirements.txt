@@ -1,0 +1,8 @@
+pytest >= 6.0.1
+allure-pytest>= 2.8.17
+allure-python-commons>=2.8.17
+pytest-rerunfailures>=9.0
+pytest-logger>=0.5.1
+Faker == 4.1.1
+requests == 2.24.0
+pytest-repeat == 0.8.0

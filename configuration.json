@@ -1,0 +1,5 @@
+{
+  "dataJson": "//src//resources//input_data//data.json",
+  "inputData": "//src//resources//input_data//input_data.json",
+  "global_data": "//src//resources//input_data//global_data.json"
+}

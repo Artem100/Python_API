@@ -48,12 +48,11 @@ class ApiService(object):
         username = json_users['environments']['creds'][user]['username']
         password = json_users['environments']['creds'][user]['password']
 
-        data = {"username": username, "password": password, "client_id": "web_client",
-                "grant_type": "password", "client_secret": "secret", "scope": "api openid chat"}
+        data = {"username": username, "password": password}
 
         logging.info("Login with creds: username:{} , password:{}".format(username, password))
 
-        response = requests.post(self._auth_api_url+"/connect/token",
+        response = requests.post(self._auth_api_url + "/connect/token",
                                  headers={'content-type': 'application/x-www-form-urlencoded'}, data=data)
         cookie = response.json()["token_type"] + " " + response.json()["access_token"]
         return cookie

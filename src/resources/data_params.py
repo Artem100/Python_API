@@ -1,8 +1,6 @@
 import logging
 
-from sys import platform
 from os.path import dirname, abspath
-from os import getenv
 
 from src.utils.utils import read_file
 

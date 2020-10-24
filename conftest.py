@@ -8,7 +8,8 @@ import pytest
 LOGGER = logging.getLogger(__name__)
 ROOT_DIR = dirname(abspath(__file__))
 
-@pytest.fixture
+
+@pytest.fixture(scope='session')
 def env_param(request):
     return request.config.getoption("--env")
 

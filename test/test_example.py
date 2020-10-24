@@ -1,4 +1,2 @@
-class TestExample():
+from src.resources.data_params import DataAPI
 
-    def test_01(self):
-        pass

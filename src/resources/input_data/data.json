@@ -1,0 +1,14 @@
+{
+  "environments": {
+    "PROD": {
+      "ui": "",
+      "api" : "https://jsonplaceholder.typicode.com/",
+      "creds": {
+        "user1": {
+          "email": "",
+          "password": ""
+        }
+      }
+    }
+  }
+}

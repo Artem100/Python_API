@@ -1,0 +1,10 @@
+1. Positive login
+2. Invalid email
+3. Invalid password
+4. Create issue
+5. Get info about issue
+6. Add comment to issue
+7. Update priority
+8. Get info about priority
+9. Delete issue
+10. Check that issue was deleted

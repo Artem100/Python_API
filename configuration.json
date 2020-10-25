@@ -1,5 +1,5 @@
 {
-  "dataJson": "//src//resources//input_data//data.json",
-  "inputData": "//src//resources//input_data//my_data//input_data.json",
+  "dataJson": "//src//resources//input_data//env_and_creds//env_stage//data.json",
+  "inputData": "//src//resources//input_data//myData//qa_input_data//input_data.json",
   "global_data": "//src//resources//input_data//global_data.json"
 }

@@ -1,0 +1,11 @@
+{
+    "api" : "stage/api",
+    "api_auth": "",
+
+    "creds": {
+      "user1": {
+        "email": "",
+        "password": ""
+      }
+    }
+}

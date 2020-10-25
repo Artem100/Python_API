@@ -1,0 +1,11 @@
+{
+    "api" : "test/api",
+    "api_auth": "",
+
+    "creds": {
+      "user1": {
+        "email": "hello",
+        "password": ""
+      }
+    }
+}

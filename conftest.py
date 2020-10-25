@@ -1,18 +1,17 @@
 import logging
 
+from sys import platform
 from os.path import dirname, abspath
 
-import pytest
 
 
 LOGGER = logging.getLogger(__name__)
 ROOT_DIR = dirname(abspath(__file__))
-
-
-@pytest.fixture(scope='session')
-def env_param(request):
-    return request.config.getoption("--env")
+DOWNLOAD_DIR = ROOT_DIR + "//download_files"
 
 
 def pytest_addoption(parser):
-    parser.addoption("--env", action="store", default="qa", help="Type of environments: dev, qa, pre-prod")
+    parser.addoption("--env", action="store", default="qa", help="Type of browser: dev, qa, pre-prod")
+
+
+

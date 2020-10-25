@@ -1,10 +1,10 @@
 {
-    "api" : "test/api",
+    "api" : "https://jira.hillel.it",
     "api_auth": "",
 
     "creds": {
       "user1": {
-        "email": "hello",
+        "username": "",
         "password": ""
       }
     }

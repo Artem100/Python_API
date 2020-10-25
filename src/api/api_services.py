@@ -4,15 +4,13 @@ import logging
 import requests
 
 from src.api.response import AssertableResponse
-from src.resources.data_params import DataAPI, json_users
+from src.resources.data_params import json_users
 
 
 class ApiService(object):
-    data_api = DataAPI()
 
     def __init__(self):
-        self._api_url = json_users['environments']['API']
-        self._auth_api_url = json_users['environments']['Auth API']
+        self._api_url = json_users['api']
 
     def _get(self, url, cookie):
         logging.info("Method: GET")
@@ -44,18 +42,26 @@ class ApiService(object):
         return requests.delete("{}{}".format(self._api_url, url),
                              headers={'content-type': 'application/json', 'Authorization': cookie})
 
+class Authorization(ApiService):
+
+    def __init__(self):
+        super().__init__()
+
     def auth(self, user):
-        username = json_users['environments']['creds'][user]['username']
-        password = json_users['environments']['creds'][user]['password']
 
-        data = {"username": username, "password": password}
+        username = json_users['creds'][user]['username']
+        password = json_users['creds'][user]['password']
 
-        logging.info("Login with creds: username:{} , password:{}".format(username, password))
+        body = {"username": username, "password": password}
 
-        response = requests.post(self._auth_api_url + "/connect/token",
-                                 headers={'content-type': 'application/x-www-form-urlencoded'}, data=data)
-        cookie = response.json()["token_type"] + " " + response.json()["access_token"]
-        return cookie
+        logging.info(f"Login to *{self._api_url}/rest/auth/1/session/* with creds: username: {username} , password: {password}")
+
+        response = requests.post(self._api_url + "/rest/auth/1/session/", data=json.dumps(body),
+                                 headers={'content-type': 'application/json'})
+        # cookie = response.json()["token_type"] + " " + response.json()["access_token"]
+        # response.status_code("200")
+        r = response.json()['session']['value']
+        return r
 
 class ExampleApiClass(ApiService):
 

@@ -4,8 +4,8 @@
 
     "creds": {
       "user1": {
-        "username": "",
-        "password": ""
+        "username": "Artem Stolbtsov",
+        "password": "strongpassword"
       }
     }
 }

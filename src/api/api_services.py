@@ -56,12 +56,11 @@ class Authorization(ApiService):
 
         logging.info(f"Login to *{self._api_url}/rest/auth/1/session/* with creds: username: {username} , password: {password}")
 
-        response = requests.post(self._api_url + "/rest/auth/1/session/", data=json.dumps(body),
+        response = requests.post(self ._api_url + "/rest/auth/1/session/", data=json.dumps(body),
                                  headers={'content-type': 'application/json'})
-        # cookie = response.json()["token_type"] + " " + response.json()["access_token"]
-        # response.status_code("200")
-        r = response.json()['session']['value']
-        return r
+        AssertableResponse(response)
+        cookie = response.json()['session']['value']
+        return cookie
 
 class ExampleApiClass(ApiService):
 

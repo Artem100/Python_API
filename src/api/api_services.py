@@ -16,12 +16,12 @@ class ApiService(object):
     def _get(self, url, cookie):
         logging.info("Method: GET")
         return requests.get("{}{}".format(self._api_url, url),
-                            headers={'content-type': 'application/json', 'Authorization': cookie})
+                            headers={'content-type': 'application/json', "JSESSIONID=": cookie})
 
     def _post(self, url, body, cookie):
         logging.info("Method: POST")
         return requests.post("{}{}".format(self._api_url, url), data=json.dumps(body),
-                            headers={'content-type': 'application/json', 'Authorization': cookie})
+                            headers={'content-type': 'application/json', "JSESSIONID=": cookie})
 
     def _post_form_data(self, url, form_data, cookie):
         logging.info("Method: POST")
@@ -69,12 +69,13 @@ class Authorization(ApiService):
         return AssertableResponse(response)
 
 
-class ExampleApiClass(ApiService):
+class Issue(ApiService):
 
     def __init__(self):
         super().__init__()
 
+    def create_issue(self, user, create_user_body):
+        return AssertableResponse(self._post("/rest/api/2/issue/", create_user_body, user))
 
-    def example_api_method(self, user, create_user_body):
-        cookie = self.auth(user)
-        return AssertableResponse(self._post("/user/registerUser", create_user_body, cookie))
+    def get_info_issue(self, user, id_issue):
+        return AssertableResponse(self._get("/rest/api/2/issue/" + id_issue, user))

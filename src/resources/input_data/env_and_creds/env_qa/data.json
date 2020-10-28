@@ -4,8 +4,12 @@
 
     "creds": {
       "user1": {
-        "username": "Artem Stolbtsov",
-        "password": "strongpassword"
+        "username": "",
+        "password": ""
+      },
+      "incorrect_creds": {
+        "username": "Negative user",
+        "password": "Negative password"
       }
     }
 }

@@ -57,7 +57,7 @@ class FieldAndValue(Conditions):
 field_and_value = FieldAndValue
 
 
-class ValueGreaterThan(Conditions):
+class LenOfValueInField(Conditions):
 
     """
     value_of_field > count_number
@@ -83,7 +83,7 @@ class ValueGreaterThan(Conditions):
         return "Field {} has a length of value more than *{}*".format(self._field, self._value)
 
 
-value_greater_than = ValueGreaterThan
+len_value_in_field = LenOfValueInField
 
 
 

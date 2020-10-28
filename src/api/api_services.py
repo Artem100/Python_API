@@ -1,6 +1,7 @@
 import json
 import logging
 
+import allure
 import requests
 
 from src.api.response import AssertableResponse
@@ -47,20 +48,26 @@ class Authorization(ApiService):
     def __init__(self):
         super().__init__()
 
-    def auth(self, user):
-
+    def body_auth(self, user):
         username = json_users['creds'][user]['username']
         password = json_users['creds'][user]['password']
-
         body = {"username": username, "password": password}
+        return username, password, body
 
+    def auth(self, user):
+        username, password, body = self.body_auth(user)
         logging.info(f"Login to *{self._api_url}/rest/auth/1/session/* with creds: username: {username} , password: {password}")
-
         response = requests.post(self ._api_url + "/rest/auth/1/session/", data=json.dumps(body),
                                  headers={'content-type': 'application/json'})
-        AssertableResponse(response)
         cookie = response.json()['session']['value']
         return cookie
+
+    def login(self, user):
+        username, password, body = self.body_auth(user)
+        with allure.step(f"Login with creds username: {username} , password: {password}"):
+            response = requests.post(self._api_url + "/rest/auth/1/session/", data=json.dumps(body), headers={'content-type': 'application/json'})
+        return AssertableResponse(response)
+
 
 class ExampleApiClass(ApiService):
 

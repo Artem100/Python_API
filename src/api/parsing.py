@@ -1,4 +1,5 @@
 import abc
+import logging
 
 class Parsing():
 
@@ -28,29 +29,6 @@ class ExtractField(Parsing):
 extract_field = ExtractField
 
 
-class ExtractFieldDictValue(Parsing):
-
-    '''
-        field:{value1, value2}
-    '''
-
-    def __init__(self, field, index):
-        super().__init__()
-        self._field = field
-        self._index = index
-
-    def extract(self, response):
-        try:
-           return response.json()[self._field][self._index]
-        except KeyError:
-            assert False, "\nResponse body doesn't have *{}* field".format(self._field)
-
-    def __repr__(self):
-        return "value from list: *{}*".format(self._field)
-
-extract_field_dict_value = ExtractFieldDictValue
-
-
 class ExtractFieldListValue(Parsing):
 
 
@@ -61,6 +39,7 @@ class ExtractFieldListValue(Parsing):
 
     def extract(self, response):
         try:
+            logging.info(f"Extract values from key path: [{self._field}][{self._index}]")
             return response.json()[self._field][self._index]
         except KeyError:
             assert False, "\nResponse body doesn't have *{}* field".format(self._field)
@@ -109,12 +88,22 @@ class GetCompanyID(Parsing):
 
     def extract(self, response):
         try:
-            return response.json()["data"]["companyIds"][0]
+            return response.json()["data"][0]
         except KeyError:
             assert False, "\nResponse body doesn't have *{}* field".format(response.json()["data"]["dealIds"])
 
 
 get_id_company = GetCompanyID
+
+class GetErrorLogin(Parsing):
+
+    def extract(self, response):
+        try:
+            return response.json()["errorMessages"][0]
+        except KeyError:
+            assert False, f"\nResponse body doesn't have *{response.json()['errorMessages'][0]}* field"
+
+get_error_login = GetErrorLogin
 
 
 

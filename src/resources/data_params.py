@@ -26,6 +26,7 @@ class DataUI:
         return password
 
     MAIN_USER = input_data['user']
+    INCORRECT_CREDS = json_global_data['incorrect_creds']
     USER_EMAIL = input_data['email_user']
     TXT_FILE = docs_files_folder + "test.txt"
 

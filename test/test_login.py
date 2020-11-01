@@ -6,17 +6,19 @@ from src.api.parsing import extract_field, extract_field_list_value, get_error_l
 from src.resources.data_params import DataApi, DataUI
 
 
-class TestExample():
+class Example():
+    """Just example how to test authorization"""
 
     def test_cookie_login(self):
         response = Authorization().auth(DataUI.MAIN_USER)
         print(response)
 
     def test_positive_login(self):
+        "Just example how to test authorization"
         response = Authorization().login(DataUI.MAIN_USER)
         response.should_have(status_code(200))
         with allure.step("Check that cookie has values"):
-            assert response.parse_body(extract_field_list_value("session", "name")) == "JSESSIONID"
+            assert response.parse_body(extract_field_list_value("session", "name")) == "token"
             assert len(response.parse_body(extract_field_list_value("session", "value"))) >= 1
 
 

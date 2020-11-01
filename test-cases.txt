@@ -1,9 +1,6 @@
-1. Positive login
-2. Invalid creds
-3. Create issue
-4. Get info about issue
-5. Add comment to issue
-6. Update priority
-7. Get info about priority
-8. Delete issue
-9. Check that issue was deleted
+1. Create post
+2. Get info about new post
+3. Update post
+4. Get info after update post
+5. Delete post
+6. Check that post was deleted with id

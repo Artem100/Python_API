@@ -13,35 +13,25 @@ class ApiService(object):
     def __init__(self):
         self._api_url = json_users['api']
 
-    def _get(self, url, cookie):
+    def _get(self, url):
         logging.info("Method: GET")
         return requests.get("{}{}".format(self._api_url, url),
-                            headers={'content-type': 'application/json', "JSESSIONID=": cookie})
+                            headers={'content-type': 'application/json'})
 
-    def _post(self, url, body, cookie):
+    def _post(self, url, body):
         logging.info("Method: POST")
         return requests.post("{}{}".format(self._api_url, url), data=json.dumps(body),
-                            headers={'content-type': 'application/json', "JSESSIONID=": cookie})
+                            headers={'content-type': 'application/json'})
 
-    def _post_form_data(self, url, form_data, cookie):
-        logging.info("Method: POST")
-        return requests.post("{}{}".format(self._api_url, url), data=form_data,
-                            headers={'content-type': 'application/x-www-form-urlencoded', 'Authorization': cookie})
-
-    def _put(self, url, body, cookie):
+    def _put(self, url, body):
         logging.info("Method: PUT")
         return requests.put("{}{}".format(self._api_url, url), data=json.dumps(body),
-                             headers={'content-type': 'application/json', 'Authorization': cookie})
+                             headers={'content-type': 'application/json'})
 
-    def _put_form_data(self, url, form_data, cookie, files=None):
-        logging.info("Method: PUT")
-        return requests.put("{}{}".format(self._api_url, url), data=form_data,  files=files,
-                            headers={'content-type': 'application/x-www-form-urlencoded', 'Authorization': cookie})
-
-    def _delete(self, url, cookie):
+    def _delete(self, url):
         logging.info("Method: DELETE")
         return requests.delete("{}{}".format(self._api_url, url),
-                             headers={'content-type': 'application/json', 'Authorization': cookie})
+                             headers={'content-type': 'application/json'})
 
 class Authorization(ApiService):
 
@@ -69,13 +59,33 @@ class Authorization(ApiService):
         return AssertableResponse(response)
 
 
-class Issue(ApiService):
+class PostsService(ApiService):
 
     def __init__(self):
         super().__init__()
 
-    def create_issue(self, user, create_user_body):
-        return AssertableResponse(self._post("/rest/api/2/issue/", create_user_body, user))
+    url = "/posts/"
 
-    def get_info_issue(self, user, id_issue):
-        return AssertableResponse(self._get("/rest/api/2/issue/" + id_issue, user))
+    def create_one_post(self, body):
+        return AssertableResponse(self._post(self.url, body))
+
+    def get_info_about_post(self, id_post):
+        return AssertableResponse(self._get(self.url+id_post))
+
+    def update_post(self, id_post, body):
+        return AssertableResponse(self._put(self.url+id_post, body))
+
+    def delete_post(self, id_post):
+        return AssertableResponse(self._delete(self.url+id_post))
+
+
+# class WithCookie(ApiService):
+#
+#     def __init__(self):
+#         super().__init__()
+#
+#     def create_issue(self, user, create_user_body):
+#         return AssertableResponse(self._post("/posts", create_user_body, user))
+#
+#     def get_info_issue(self, user, id_issue):
+#         return AssertableResponse(self._get("/rest/api/2/issue/" + id_issue, user))

@@ -1,5 +1,5 @@
 {
-    "api" : "https://jira.hillel.it",
+    "api" : "https://jsonplaceholder.typicode.com",
     "api_auth": "",
 
     "creds": {

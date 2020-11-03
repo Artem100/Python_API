@@ -21,4 +21,5 @@ class TestIssue():
     def test_01(self):
         response = PostsService().create_one_post(JSONBody.create_post_json(self.title, self.body, self.userId))
         response.should_have(status_code(201))
+        ##
 

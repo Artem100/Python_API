@@ -10,7 +10,7 @@ class JSONBody:
         return json
 
     @staticmethod
-    def create_post_json(title, body, userId):
+    def post_body(title, body, userId):
         json = {
               "title": title,
               "body": body,

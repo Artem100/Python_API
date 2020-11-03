@@ -1,6 +1,5 @@
-1. Create post
-2. Get info about new post
+1. Create post +
+2. Get info about post +
 3. Update post
-4. Get info after update post
 5. Delete post
 6. Check that post was deleted with id

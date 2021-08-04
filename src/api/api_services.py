@@ -1,8 +1,8 @@
 import json
 import logging
+import requests
 
 import allure
-import requests
 
 from src.api.response import AssertableResponse
 from src.resources.data_params import json_users

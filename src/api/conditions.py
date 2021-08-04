@@ -1,5 +1,9 @@
 import abc
 
+import jsonpath_rw
+from hamcrest import assert_that, equal_to
+
+
 class Conditions():
 
     def __init__(self):
@@ -122,3 +126,26 @@ class OneIndexFieldValue(Conditions):
 
 
 one_index_field_value = OneIndexFieldValue
+
+class BodyFieldCondition(Conditions):
+
+    def __init__(self, json_path, matcher):
+        super().__init__()
+        self._json_path = json_path
+        self._matcher = matcher
+
+    def match(self, response):
+        json = response.json()
+        value = jsonpath_rw.parse(self._json_path).find(json)[0].value
+        match = self._matcher
+        try:
+            assert value == match
+            assert assert_that(value, match)
+        except:
+            assert False, "value: {} and match: {}".format(value, match)
+
+
+    def __repr__(self):
+        return "Body field *{}* and value: {}".format(self._json_path, self._matcher)
+
+body = BodyFieldCondition

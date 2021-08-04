@@ -4,6 +4,8 @@ allure-python-commons>=2.8.17
 pytest-rerunfailures>=9.0
 pytest-logger>=0.5.1
 Faker == 4.1.1
-requests == 2.24.0
 pytest-repeat == 0.8.0
 pdfminer == 20191125
+requests == 2.26.0
+jsonpath-rw == 1.4.0
+PyHamcrest == 1.9.0

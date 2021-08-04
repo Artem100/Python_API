@@ -1,9 +1,10 @@
 import random
 
 import pytest
+from hamcrest import equal_to, has_length, greater_than
 
 from src.api.api_services import PostsService
-from src.api.conditions import status_code, field_and_value
+from src.api.conditions import status_code, field_and_value, body
 from src.api.json_body import JSONBody
 from src.resources.data_params import DataUI
 
@@ -28,8 +29,10 @@ class TestIssue():
     def test_02(self):
         response = PostsService().get_info_about_post(self.post_id)
         response.should_have(status_code(200))
-        response.should_have(field_and_value("id", 100))
-        response.should_have(field_and_value("title", "at nam consequatur ea labore ea harum"))
+        # response.should_have(field_and_value("id", 100))
+        # response.should_have(field_and_value("title", "at nam consequatur ea labore ea harum"))
+        # response.should_have(body("$.id", equal_to(100)))
+        response.should_have(body("$.id", 100))
 
     def test_03(self):
         response = PostsService().update_post(self.post_id, JSONBody.post_body(self.title_2, self.body_2, self.userId_2))

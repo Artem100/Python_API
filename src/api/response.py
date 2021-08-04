@@ -15,6 +15,6 @@ class AssertableResponse(object):
         condition.match(self._response)
 
     def parse_body(self, parsing):
-        # logging.info("Extract value " + str(parsing))
+        logging.info("Extract value " + str(parsing))
         return parsing.extract(self._response)
 
